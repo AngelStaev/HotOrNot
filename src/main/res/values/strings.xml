@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">HotOrNot</string>
+    <string name="today">Today</string>
+    <string name="rain">Rain</string>
+    <string name="_29_11_2020">29/11/2020</string>
+    <string name="_10_10">10°-10°</string>
+    <string name="shower_rain">shower rain</string>
+    <string name="_10">10°</string>
+    <string name="_100">100%</string>
+    <string name="_2m_s">2m/s</string>
+    <string name="_90">90%</string>
 </resources>
