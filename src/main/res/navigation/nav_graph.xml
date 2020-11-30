@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.hotornot.view.fragments.HomeFragment"
+        android:label="HomeFragment" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.hotornot.MainActivity"
+        android:label="MainActivity" />
+    <fragment
+        android:id="@+id/detailsForecastTabFragment"
+        android:name="com.example.hotornot.view.fragments.DetailsForecastTabFragment"
+        android:label="fragment_details_forecast_tab"
+        tools:layout="@layout/fragment_details_forecast_tab" />
+    <fragment
+        android:id="@+id/overallForecastTabFragment"
+        android:name="com.example.hotornot.view.fragments.OverallForecastTabFragment"
+        android:label="OverallForecastTabFragment" />
+</navigation>

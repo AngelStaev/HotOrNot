@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@android:dimen/app_icon_size"
+        android:padding="30dp"
         android:background="#0074B3"
         >
 
