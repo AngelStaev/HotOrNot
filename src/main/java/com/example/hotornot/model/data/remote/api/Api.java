@@ -1,6 +1,6 @@
 package com.example.hotornot.model.data.remote.api;
 
-import com.example.hotornot.model.data.local.Weather;
+import com.example.hotornot.model.data.local.database.models.Weather;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
