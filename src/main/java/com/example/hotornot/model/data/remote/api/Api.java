@@ -1,6 +1,7 @@
 package com.example.hotornot.model.data.remote.api;
 
-import com.example.hotornot.model.data.local.database.models.Weather;
+import com.example.hotornot.model.data.local.Constants;
+import com.example.hotornot.model.data.local.database.models.CurrentWeather;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,18 +37,21 @@ public class Api {
         service = retrofit.create(WeatherService.class);
     }
 
-    public void getCurrentWeather(double lat, double lon, String key, String units, final DataListener<Weather> listener) {
-        service.getCurrentWeather(lat, lon, key, units).enqueue(new Callback<CurrentWeatherResponse>() {
+    public void getCurrentWeather(double lat, double lon, final DataListener<CurrentWeather> listener) {
+        service.getCurrentWeather(lat, lon, Constants.API_KEY, Constants.UNITS).enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
             public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 if (response.isSuccessful()) {
-                    listener.onDataReceived(Weather.);
+                    CurrentWeather currentWeather = new CurrentWeather(response.body());
+                    listener.onDataReceived(currentWeather);
+                }else {
+                    listener.onFailure(response.errorBody().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
-
+                listener.onFailure(t.getLocalizedMessage());
             }
         });
 
@@ -64,5 +68,6 @@ public class Api {
 
     public interface DataListener<T> {
         void onDataReceived(T data);
+        void onFailure(String message);
     }
 }

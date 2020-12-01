@@ -16,7 +16,7 @@ public interface WeatherService {
             @Query("units") String units );
 
     @GET("forecast/daily")
-    Call<DailyForecastResponse> getTomorrowsForecast(
+    Call<DetailForecastResponse> getTomorrowsForecast(
             @Query("lat") double lat,
             @Query("lon") double lon,
             @Query("APPID") String key,
@@ -25,7 +25,7 @@ public interface WeatherService {
     );
 
     @GET("forecast")
-    Call<HourlyForecastResponse> getHourlyForecast(
+    Call<DetailForecastResponse> getHourlyForecast(
             @Query("lat") double lat,
             @Query("lon") double lon,
             @Query("APPID") String key,

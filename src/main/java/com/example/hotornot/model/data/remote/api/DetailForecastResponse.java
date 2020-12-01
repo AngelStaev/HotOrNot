@@ -1,10 +1,13 @@
 package com.example.hotornot.model.data.remote.api;
 
 import com.example.hotornot.model.data.remote.models.City;
+import com.example.hotornot.model.data.remote.models.DetailWeatherItem;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HourlyForecastResponse {
+import java.util.List;
+
+public class DetailForecastResponse {
 
     @SerializedName("city")
     @Expose
@@ -20,7 +23,7 @@ public class HourlyForecastResponse {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.example.hotornot.model.data.remote.models.List> list = null;
+    private List<DetailWeatherItem> detailWeatherItem = null;
 
     public City getCity() {
         return city;
@@ -54,11 +57,11 @@ public class HourlyForecastResponse {
         this.cnt = cnt;
     }
 
-    public java.util.List<com.example.hotornot.model.data.remote.models.List> getList() {
-        return list;
+    public List<DetailWeatherItem> getDetailWeatherItem() {
+        return detailWeatherItem;
     }
 
-    public void setList(java.util.List<com.example.hotornot.model.data.remote.models.List> list) {
-        this.list = list;
+    public void setDetailWeatherItem(List<DetailWeatherItem> detailWeatherItem) {
+        this.detailWeatherItem = detailWeatherItem;
     }
 }

@@ -1,56 +1,47 @@
-package com.example.hotornot.model.data.local.database.models;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+package com.example.hotornot.model.data.remote.models;
 
-import com.example.hotornot.model.data.remote.models.Temp;
-import com.example.hotornot.model.data.remote.models.Weather;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "lists")
-public class List {
+public class DetailWeatherItem {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-
-    @ColumnInfo(name = "dt")
+    @SerializedName("dt")
+    @Expose
     private Integer dt;
-
-    @ColumnInfo(name = "sunrise")
+    @SerializedName("sunrise")
+    @Expose
     private Integer sunrise;
-
-    @ColumnInfo(name = "sunset")
+    @SerializedName("sunset")
+    @Expose
     private Integer sunset;
-
-    @ColumnInfo(name = "temp")
+    @SerializedName("temp")
+    @Expose
     private Temp temp;
-
-    @ColumnInfo(name = "pressure")
+    @SerializedName("pressure")
+    @Expose
     private Integer pressure;
-
-    @ColumnInfo(name = "humidity")
+    @SerializedName("humidity")
+    @Expose
     private Integer humidity;
-
-    @ColumnInfo(name = "weather")
+    @SerializedName("weather")
+    @Expose
     private java.util.List<Weather> weather = null;
-
-    @ColumnInfo(name = "speed")
+    @SerializedName("speed")
+    @Expose
     private Double speed;
-
-    @ColumnInfo(name = "deg")
+    @SerializedName("deg")
+    @Expose
     private Integer deg;
-
-    @ColumnInfo(name = "clouds")
+    @SerializedName("clouds")
+    @Expose
     private Integer clouds;
-
-    @ColumnInfo(name = "pop")
+    @SerializedName("pop")
+    @Expose
     private Integer pop;
-
-    @ColumnInfo(name = "rain")
+    @SerializedName("rain")
+    @Expose
     private Double rain;
-
-    public List() {
-    }
 
     public Integer getDt() {
         return dt;
@@ -147,4 +138,5 @@ public class List {
     public void setRain(Double rain) {
         this.rain = rain;
     }
+
 }
