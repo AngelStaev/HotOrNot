@@ -1,18 +1,23 @@
 package com.example.hotornot.model.data.local.database.models;
 
+import android.util.Log;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import com.example.hotornot.model.data.remote.api.CurrentWeatherResponse;
-import com.example.hotornot.model.data.remote.models.Clouds;
-import com.example.hotornot.model.data.remote.models.Main;
-import com.example.hotornot.model.data.remote.models.Weather;
-import com.example.hotornot.model.data.remote.models.Wind;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.example.hotornot.model.data.local.database.converters.CloudsTypeConverter;
+import com.example.hotornot.model.data.local.database.converters.MainTypeConverter;
+import com.example.hotornot.model.data.local.database.converters.WeatherTypeConverter;
+import com.example.hotornot.model.data.local.database.converters.WindTypeConverter;
+import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Entity(tableName = "current_weather")
 public class CurrentWeather {
@@ -20,15 +25,19 @@ public class CurrentWeather {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+    @TypeConverters(WeatherTypeConverter.class)
     @ColumnInfo(name = "weather")
     private List<Weather> weather = null;
 
+    @TypeConverters(MainTypeConverter.class)
     @ColumnInfo(name = "main")
     private Main main;
 
+    @TypeConverters(WindTypeConverter.class)
     @ColumnInfo(name = "wind")
     private Wind wind;
 
+    @TypeConverters(CloudsTypeConverter.class)
     @ColumnInfo(name = "clouds")
     private Clouds clouds;
 
@@ -50,6 +59,7 @@ public class CurrentWeather {
         this.clouds = currentWeatherResponse.getClouds();
         this.requestTime = currentWeatherResponse.getRequestTime();
         this.cityName = currentWeatherResponse.getCityName();
+
     }
 
 
@@ -96,6 +106,11 @@ public class CurrentWeather {
 
     public Integer getRequestTime() {
         return requestTime;
+    }
+
+    public String getCurrentDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return simpleDateFormat.format(new Date());
     }
 
     public void setRequestTime(Integer requestTime) {

@@ -1,10 +1,19 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+@Entity(tableName = "details_weather_items")
 public class DetailWeatherItem {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("dt")
     @Expose
@@ -26,7 +35,7 @@ public class DetailWeatherItem {
     private Integer humidity;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = null;
+    private List<Weather> weather = null;
     @SerializedName("speed")
     @Expose
     private Double speed;
@@ -42,6 +51,17 @@ public class DetailWeatherItem {
     @SerializedName("rain")
     @Expose
     private Double rain;
+    @SerializedName("dt_txt")
+    @Expose
+    private String dtTxt;
+
+    public String getDtTxt() {
+        return dtTxt;
+    }
+
+    public void setDtTxt(String dtTxt) {
+        this.dtTxt = dtTxt;
+    }
 
     public Integer getDt() {
         return dt;
@@ -139,4 +159,11 @@ public class DetailWeatherItem {
         this.rain = rain;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -1,5 +1,8 @@
 package com.example.hotornot.model.data.remote.api;
 
+import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
+import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -1,11 +1,17 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "weathers")
 public class Weather {
 
+
+    @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     @Expose
     private Integer id;

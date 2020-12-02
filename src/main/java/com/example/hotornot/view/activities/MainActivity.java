@@ -1,8 +1,10 @@
-package com.example.hotornot;
+package com.example.hotornot.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.hotornot.R;
 
 public class MainActivity extends AppCompatActivity {
 

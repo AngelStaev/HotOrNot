@@ -1,7 +1,7 @@
-package com.example.hotornot.model.data.remote.api;
+package com.example.hotornot.model.data.remote.models;
 
-import com.example.hotornot.model.data.remote.models.City;
-import com.example.hotornot.model.data.remote.models.DetailWeatherItem;
+import com.example.hotornot.model.data.local.database.models.City;
+import com.example.hotornot.model.data.local.database.models.DetailWeatherItem;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -56,6 +56,10 @@ public class CurrentWeatherService {
 
             @Override
             protected Void doInBackground(Void... voids) {
+                CurrentWeather oldEntity = currentWeatherDao.getCurrentWeather();
+                if (oldEntity != null) {
+                    currentWeatherDao.delete(oldEntity);
+                }
                 currentWeatherDao.insertAll(currentWeather);
                 return null;
             }

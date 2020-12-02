@@ -1,9 +1,16 @@
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "winds")
 public class Wind {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("speed")
     @Expose
@@ -28,4 +35,11 @@ public class Wind {
         this.deg = deg;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

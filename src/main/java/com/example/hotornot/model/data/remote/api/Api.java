@@ -2,6 +2,9 @@ package com.example.hotornot.model.data.remote.api;
 
 import com.example.hotornot.model.data.local.Constants;
 import com.example.hotornot.model.data.local.database.models.CurrentWeather;
+import com.example.hotornot.model.data.local.database.models.DetailsForecast;
+import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
+import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -44,7 +47,7 @@ public class Api {
                 if (response.isSuccessful()) {
                     CurrentWeather currentWeather = new CurrentWeather(response.body());
                     listener.onDataReceived(currentWeather);
-                }else {
+                } else {
                     listener.onFailure(response.errorBody().toString());
                 }
             }
@@ -57,17 +60,41 @@ public class Api {
 
     }
 
-    
-    public void getTomorrowsForecast() {
+
+    public void getTomorrowsForecast(double lat, double lon, final DataListener<DetailsForecast> listener) {
+        service.getTomorrowsForecast(lat, lon, Constants.API_KEY, Constants.NEXT_DAY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<DetailForecastResponse>() {
+            @Override
+            public void onResponse(Call<DetailForecastResponse> call, Response<DetailForecastResponse> response) {
+                DetailsForecast detailsForecast = new DetailsForecast(response.body());
+                listener.onDataReceived(detailsForecast);
+            }
+
+            @Override
+            public void onFailure(Call<DetailForecastResponse> call, Throwable t) {
+                listener.onFailure(t.getLocalizedMessage());
+            }
+        });
 
     }
 
-    public void getHourlyForecast() {
+    public void getHourlyForecast(final double lat, double lon, final DataListener<DetailsForecast> listener) {
+        service.getHourlyForecast(lat, lon, Constants.API_KEY, Constants.HOURLY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<DetailForecastResponse>() {
+            @Override
+            public void onResponse(Call<DetailForecastResponse> call, Response<DetailForecastResponse> response) {
+                DetailsForecast detailsForecast = new DetailsForecast(response.body());
+                listener.onDataReceived(detailsForecast);
+            }
 
+            @Override
+            public void onFailure(Call<DetailForecastResponse> call, Throwable t) {
+                listener.onFailure(t.getLocalizedMessage());
+            }
+        });
     }
 
     public interface DataListener<T> {
         void onDataReceived(T data);
+
         void onFailure(String message);
     }
 }

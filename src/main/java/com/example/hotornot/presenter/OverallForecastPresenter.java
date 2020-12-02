@@ -1,10 +1,8 @@
 package com.example.hotornot.presenter;
 
 import com.example.hotornot.model.data.local.database.models.CurrentWeather;
+import com.example.hotornot.model.data.local.database.models.DetailsForecast;
 import com.example.hotornot.model.data.remote.api.Api;
-import com.example.hotornot.model.data.remote.api.CurrentWeatherResponse;
-import com.example.hotornot.model.data.remote.api.DetailForecastResponse;
-import com.example.hotornot.view.fragments.OverallForecastTabFragment;
 
 public class OverallForecastPresenter {
 
@@ -30,10 +28,25 @@ public class OverallForecastPresenter {
         });
     }
 
+    public void getNextDayForecast(double lat, double lon) {
+        api.getTomorrowsForecast(lat, lon, new Api.DataListener<DetailsForecast>() {
+            @Override
+            public void onDataReceived(DetailsForecast data) {
+                listener.onNextDayForecastReceived(data);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                listener.onFailure(message);
+            }
+        });
+    }
+
+
     public interface OverallForecastListener {
         void onCurrentWeatherReceived(CurrentWeather currentWeather);
 
-        void onNextDayForecastReceived();
+        void onNextDayForecastReceived(DetailsForecast detailsForecast);
 
         void onFailure(String message);
     }

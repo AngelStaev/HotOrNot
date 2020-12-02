@@ -8,18 +8,29 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.hotornot.view.fragments.HomeFragment"
-        android:label="HomeFragment" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.hotornot.MainActivity"
-        android:label="MainActivity" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailsForecastTabFragment"
+            app:destination="@id/detailsForecastTabFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_overallForecastTabFragment"
+            app:destination="@id/overallForecastTabFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsForecastTabFragment"
         android:name="com.example.hotornot.view.fragments.DetailsForecastTabFragment"
         android:label="fragment_details_forecast_tab"
-        tools:layout="@layout/fragment_details_forecast_tab" />
+        tools:layout="@layout/fragment_details_forecast_tab" >
+        <action
+            android:id="@+id/action_detailsForecastTabFragment_to_overallForecastTabFragment"
+            app:destination="@id/overallForecastTabFragment" />
+    </fragment>
     <fragment
         android:id="@+id/overallForecastTabFragment"
         android:name="com.example.hotornot.view.fragments.OverallForecastTabFragment"
-        android:label="OverallForecastTabFragment" />
+        android:label="OverallForecastTabFragment" >
+        <action
+            android:id="@+id/action_overallForecastTabFragment_to_detailsForecastTabFragment"
+            app:destination="@id/detailsForecastTabFragment" />
+    </fragment>
 </navigation>
