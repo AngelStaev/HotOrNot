@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.hotornot.model.data.local.database.converters.CloudsTypeConverter;
+import com.example.hotornot.model.data.local.database.converters.DateTypeConverter;
 import com.example.hotornot.model.data.local.database.converters.MainTypeConverter;
 import com.example.hotornot.model.data.local.database.converters.WeatherTypeConverter;
 import com.example.hotornot.model.data.local.database.converters.WindTypeConverter;
@@ -47,12 +48,17 @@ public class CurrentWeather {
     @ColumnInfo(name = "city_name")
     private String cityName;
 
+    @TypeConverters(DateTypeConverter.class)
+    @ColumnInfo(name = "created_on")
+    private Date createdOn;
+
 
     public CurrentWeather() {
-
+        createdOn = new Date();
     }
 
     public CurrentWeather(CurrentWeatherResponse currentWeatherResponse) {
+        createdOn = new Date();
         this.weather = currentWeatherResponse.getWeather();
         this.main = currentWeatherResponse.getMain();
         this.wind = currentWeatherResponse.getWind();
@@ -62,7 +68,13 @@ public class CurrentWeather {
 
     }
 
+    public Date getCreatedOn() {
+        return createdOn;
+    }
 
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
 
     public int getId() {
         return id;
@@ -110,7 +122,7 @@ public class CurrentWeather {
 
     public String getCurrentDate() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        return simpleDateFormat.format(new Date());
+        return simpleDateFormat.format(createdOn);
     }
 
     public void setRequestTime(Integer requestTime) {

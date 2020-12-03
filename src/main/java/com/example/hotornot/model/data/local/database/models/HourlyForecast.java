@@ -8,8 +8,8 @@ import androidx.room.TypeConverters;
 import com.example.hotornot.model.data.local.database.converters.CityTypeConverter;
 import com.example.hotornot.model.data.local.database.converters.DateTypeConverter;
 import com.example.hotornot.model.data.local.database.converters.DetailsWeatherItemTypeConverter;
-import com.example.hotornot.model.data.local.database.converters.WeatherTypeConverter;
 import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
+import com.example.hotornot.model.data.remote.models.HourlyForecastResponse;
 
 import org.joda.time.LocalDateTime;
 
@@ -18,8 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-@Entity(tableName = "details_forecast")
-public class DetailsForecast {
+@Entity(tableName = "hourly_forecast")
+public class HourlyForecast {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -36,22 +36,22 @@ public class DetailsForecast {
 
     @TypeConverters(DetailsWeatherItemTypeConverter.class)
     @ColumnInfo(name = "list")
-    private List<DetailWeatherItem> detailWeatherItem = null;
+    private List<HourlyWeatherItem> hourlyWeatherItems = null;
 
     @TypeConverters(DateTypeConverter.class)
     @ColumnInfo(name = "created_on")
     private Date createdOn;
 
-    public DetailsForecast() {
+    public HourlyForecast() {
         createdOn = new Date();
     }
 
-    public DetailsForecast(DetailForecastResponse detailForecastResponse) {
+    public HourlyForecast(HourlyForecastResponse hourlyForecastResponse) {
         createdOn = new Date();
-        this.city = detailForecastResponse.getCity();
-        this.message = detailForecastResponse.getMessage();
-        this.cnt = detailForecastResponse.getCnt();
-        this.detailWeatherItem = detailForecastResponse.getDetailWeatherItem();
+        this.city = hourlyForecastResponse.getCity();
+        this.message = hourlyForecastResponse.getMessage();
+        this.cnt = hourlyForecastResponse.getCnt();
+        this.hourlyWeatherItems = hourlyForecastResponse.getHourlyWeatherItems();
 
     }
 
@@ -79,12 +79,12 @@ public class DetailsForecast {
         this.cnt = cnt;
     }
 
-    public List<DetailWeatherItem> getDetailWeatherItem() {
-        return detailWeatherItem;
+    public List<HourlyWeatherItem> getHourlyWeatherItems() {
+        return hourlyWeatherItems;
     }
 
-    public void setDetailWeatherItem(List<DetailWeatherItem> detailWeatherItem) {
-        this.detailWeatherItem = detailWeatherItem;
+    public void setHourlyWeatherItems(List<HourlyWeatherItem> hourlyWeatherItems) {
+        this.hourlyWeatherItems = hourlyWeatherItems;
     }
 
     public Date getCreatedOn() {

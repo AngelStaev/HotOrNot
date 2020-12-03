@@ -3,8 +3,10 @@ package com.example.hotornot.model.data.remote.api;
 import com.example.hotornot.model.data.local.Constants;
 import com.example.hotornot.model.data.local.database.models.CurrentWeather;
 import com.example.hotornot.model.data.local.database.models.DetailsForecast;
+import com.example.hotornot.model.data.local.database.models.HourlyForecast;
 import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
 import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
+import com.example.hotornot.model.data.remote.models.HourlyForecastResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -54,6 +56,7 @@ public class Api {
 
             @Override
             public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
+                t.printStackTrace();
                 listener.onFailure(t.getLocalizedMessage());
             }
         });
@@ -71,22 +74,24 @@ public class Api {
 
             @Override
             public void onFailure(Call<DetailForecastResponse> call, Throwable t) {
+                t.printStackTrace();
                 listener.onFailure(t.getLocalizedMessage());
             }
         });
 
     }
 
-    public void getHourlyForecast(final double lat, double lon, final DataListener<DetailsForecast> listener) {
-        service.getHourlyForecast(lat, lon, Constants.API_KEY, Constants.HOURLY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<DetailForecastResponse>() {
+    public void getHourlyForecast(final double lat, double lon, final DataListener<HourlyForecast> listener) {
+        service.getHourlyForecast(lat, lon, Constants.API_KEY, Constants.HOURLY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<HourlyForecastResponse>() {
             @Override
-            public void onResponse(Call<DetailForecastResponse> call, Response<DetailForecastResponse> response) {
-                DetailsForecast detailsForecast = new DetailsForecast(response.body());
-                listener.onDataReceived(detailsForecast);
+            public void onResponse(Call<HourlyForecastResponse> call, Response<HourlyForecastResponse> response) {
+                HourlyForecast hourlyForecast = new HourlyForecast(response.body());
+                listener.onDataReceived(hourlyForecast);
             }
 
             @Override
-            public void onFailure(Call<DetailForecastResponse> call, Throwable t) {
+            public void onFailure(Call<HourlyForecastResponse> call, Throwable t) {
+                t.printStackTrace();
                 listener.onFailure(t.getLocalizedMessage());
             }
         });

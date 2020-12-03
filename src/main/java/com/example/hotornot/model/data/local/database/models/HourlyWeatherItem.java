@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 @Entity(tableName = "details_weather_items")
-public class DetailWeatherItem {
+public class HourlyWeatherItem {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -24,15 +24,15 @@ public class DetailWeatherItem {
     @SerializedName("sunset")
     @Expose
     private Integer sunset;
-    @SerializedName("temp")
-    @Expose
-    private Temp temp;
     @SerializedName("pressure")
     @Expose
     private Integer pressure;
     @SerializedName("humidity")
     @Expose
     private Integer humidity;
+    @SerializedName("main")
+    @Expose
+    private Main main;
     @SerializedName("weather")
     @Expose
     private List<Weather> weather = null;
@@ -44,7 +44,7 @@ public class DetailWeatherItem {
     private Integer deg;
     @SerializedName("clouds")
     @Expose
-    private Integer clouds;
+    private Clouds clouds;
     @SerializedName("rain")
     @Expose
     private Double rain;
@@ -84,14 +84,6 @@ public class DetailWeatherItem {
         this.sunset = sunset;
     }
 
-    public Temp getTemp() {
-        return temp;
-    }
-
-    public void setTemp(Temp temp) {
-        this.temp = temp;
-    }
-
     public Integer getPressure() {
         return pressure;
     }
@@ -108,11 +100,11 @@ public class DetailWeatherItem {
         this.humidity = humidity;
     }
 
-    public java.util.List<Weather> getWeather() {
+    public List<Weather> getWeather() {
         return weather;
     }
 
-    public void setWeather(java.util.List<Weather> weather) {
+    public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
 
@@ -132,12 +124,8 @@ public class DetailWeatherItem {
         this.deg = deg;
     }
 
-    public Integer getClouds() {
+    public Clouds getClouds() {
         return clouds;
-    }
-
-    public void setClouds(Integer clouds) {
-        this.clouds = clouds;
     }
 
     public Double getRain() {
@@ -157,6 +145,14 @@ public class DetailWeatherItem {
     }
 
     public void setClouds(Clouds clouds) {
-        this.clouds = clouds.getAll();
+        this.clouds = clouds;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
     }
 }
