@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.hotornot.R;
@@ -161,6 +162,7 @@ public class OverallForecastTabFragment extends Fragment implements OverallForec
                 + " / " + currentWeather.getMain().getTempMax().intValue() + "°");
         binding.txtDescription.setText(currentWeather.getWeather().get(0).getDescription());
         binding.imgForecast.setImageResource(getIcon(currentWeather.getWeather().get(0).getId()));
+        setCardBackground(currentWeather.getMain().getTemp().intValue(), binding.layoutToday);
     }
 
     public int getIcon(int weatherId) {
@@ -201,6 +203,8 @@ public class OverallForecastTabFragment extends Fragment implements OverallForec
         binding.txtDescriptionTomorrow.setText(detailsForecast.getDetailWeatherItem().get(0).getWeather().get(0).getDescription());
         binding.imgForecastTomorrow.setImageResource(getIcon(detailsForecast.getDetailWeatherItem().get(0)
                 .getWeather().get(0).getId()));
+        setCardBackground(detailsForecast.getDetailWeatherItem().get(0).getTemp().getDay().intValue()
+                ,binding.layoutTomorrow);
     }
 
     @SuppressLint("MissingPermission")
@@ -220,6 +224,15 @@ public class OverallForecastTabFragment extends Fragment implements OverallForec
                                            int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+
+    public void setCardBackground(int temp, RelativeLayout layout) {
+        if (temp > 22) {
+            layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorYellow));
+        } else if (temp < 22 && temp > 15) {
+            layout.setBackgroundColor(getContext().getResources().getColor(R.color.colorGreen));
+        }
     }
 
 

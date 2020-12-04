@@ -1,9 +1,11 @@
 package com.example.hotornot.view.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,8 @@ import com.example.hotornot.model.data.local.database.models.HourlyWeatherItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class DetailsForecastAdapter extends RecyclerView.Adapter<DetailsForecastAdapter.ViewHolder> {
 
@@ -47,7 +51,16 @@ public class DetailsForecastAdapter extends RecyclerView.Adapter<DetailsForecast
         holder.weather.setText(detailWeatherItem.getWeather().get(0).getMain());
         holder.description.setText(detailWeatherItem.getWeather().get(0).getDescription());
         holder.forecastIcon.setImageResource(getIcon(detailWeatherItem.getWeather().get(0).getId()));
+        setCardBackground(detailWeatherItem.getMain().getTemp().intValue(), holder.layout);
+    }
 
+
+    public void setCardBackground(int temp, RelativeLayout layout) {
+        if (temp > 22) {
+            layout.setBackgroundColor(layout.getContext().getResources().getColor(R.color.colorYellow));
+        } else if (temp < 22 && temp > 15) {
+            layout.setBackgroundColor(layout.getContext().getResources().getColor(R.color.colorGreen));
+        }
     }
 
     public int getIcon(int weatherId) {
@@ -87,7 +100,7 @@ public class DetailsForecastAdapter extends RecyclerView.Adapter<DetailsForecast
         TextView weather;
         TextView description;
         ImageView forecastIcon;
-
+        RelativeLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +109,7 @@ public class DetailsForecastAdapter extends RecyclerView.Adapter<DetailsForecast
             weather = itemView.findViewById(R.id.txtWeather);
             description = itemView.findViewById(R.id.txtDescription);
             forecastIcon = itemView.findViewById(R.id.imgForecast);
+            layout = itemView.findViewById(R.id.itemLayout);
 
         }
     }
