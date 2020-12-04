@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +44,17 @@ public class HomeFragment extends Fragment {
         binding.viewpager.setUserInputEnabled(false);
 
         TabLayout tabLayout = binding.tabs;
-        tabLayout.addTab(tabLayout.newTab().setText("OVERALL"));
-        tabLayout.addTab(tabLayout.newTab().setText("DETAILS"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        TabLayoutMediator mediator = new TabLayoutMediator(binding.tabs, binding.viewpager, (tab, position) -> {
+            Log.e("ASDASD", "" + position);
+            if (position == 0) {
+                tab.setText("OVERALL");
+            } else {
+                tab.setText("DETAILS");
+            }
+
+        });
+        mediator.attach();
     }
+
 }

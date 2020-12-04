@@ -1,5 +1,9 @@
 package com.example.hotornot.model.data.remote.api;
 
+import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
+import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
+import com.example.hotornot.model.data.remote.models.HourlyForecastResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,7 +20,7 @@ public interface WeatherService {
             @Query("units") String units );
 
     @GET("forecast/daily")
-    Call<DailyForecastResponse> getTomorrowsForecast(
+    Call<DetailForecastResponse> getTomorrowsForecast(
             @Query("lat") double lat,
             @Query("lon") double lon,
             @Query("APPID") String key,

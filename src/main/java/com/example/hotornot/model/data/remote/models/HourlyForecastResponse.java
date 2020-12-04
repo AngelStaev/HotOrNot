@@ -1,8 +1,12 @@
-package com.example.hotornot.model.data.remote.api;
+package com.example.hotornot.model.data.remote.models;
 
-import com.example.hotornot.model.data.remote.models.City;
+import com.example.hotornot.model.data.local.database.models.City;
+import com.example.hotornot.model.data.local.database.models.DetailWeatherItem;
+import com.example.hotornot.model.data.local.database.models.HourlyWeatherItem;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class HourlyForecastResponse {
 
@@ -20,7 +24,7 @@ public class HourlyForecastResponse {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.example.hotornot.model.data.remote.models.List> list = null;
+    private List<HourlyWeatherItem> hourlyWeatherItems = null;
 
     public City getCity() {
         return city;
@@ -54,11 +58,11 @@ public class HourlyForecastResponse {
         this.cnt = cnt;
     }
 
-    public java.util.List<com.example.hotornot.model.data.remote.models.List> getList() {
-        return list;
+    public List<HourlyWeatherItem> getHourlyWeatherItems() {
+        return hourlyWeatherItems;
     }
 
-    public void setList(java.util.List<com.example.hotornot.model.data.remote.models.List> list) {
-        this.list = list;
+    public void setHourlyWeatherItems(List<HourlyWeatherItem> hourlyWeatherItems) {
+        this.hourlyWeatherItems = hourlyWeatherItems;
     }
 }

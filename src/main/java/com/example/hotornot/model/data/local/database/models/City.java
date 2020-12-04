@@ -1,20 +1,22 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "cities")
 public class City {
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("coord")
-    @Expose
-    private Coord coord;
     @SerializedName("country")
     @Expose
     private String country;
@@ -39,14 +41,6 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Coord getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Coord coord) {
-        this.coord = coord;
     }
 
     public String getCountry() {

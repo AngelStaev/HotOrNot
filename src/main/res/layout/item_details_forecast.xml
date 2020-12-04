@@ -8,6 +8,7 @@
     app:cardCornerRadius="16dp">
 
     <RelativeLayout
+        android:id="@+id/itemLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
@@ -15,6 +16,7 @@
         >
 
         <ImageView
+            android:id="@+id/imgForecast"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_wi_rain"
@@ -26,20 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="29/11"
+            android:text="@string/_29_11_9_00"
             android:textSize="22sp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/txtHour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="21:00"
-            android:layout_toEndOf="@+id/txtDate"
-            android:layout_marginStart="10dp"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/txtWeather"

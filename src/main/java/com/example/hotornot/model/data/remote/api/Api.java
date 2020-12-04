@@ -1,6 +1,12 @@
 package com.example.hotornot.model.data.remote.api;
 
-import com.example.hotornot.model.data.local.Weather;
+import com.example.hotornot.model.data.local.Constants;
+import com.example.hotornot.model.data.local.database.models.CurrentWeather;
+import com.example.hotornot.model.data.local.database.models.DetailsForecast;
+import com.example.hotornot.model.data.local.database.models.HourlyForecast;
+import com.example.hotornot.model.data.remote.models.CurrentWeatherResponse;
+import com.example.hotornot.model.data.remote.models.DetailForecastResponse;
+import com.example.hotornot.model.data.remote.models.HourlyForecastResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,33 +42,64 @@ public class Api {
         service = retrofit.create(WeatherService.class);
     }
 
-    public void getCurrentWeather(double lat, double lon, String key, String units, final DataListener<Weather> listener) {
-        service.getCurrentWeather(lat, lon, key, units).enqueue(new Callback<CurrentWeatherResponse>() {
+    public void getCurrentWeather(double lat, double lon, final DataListener<CurrentWeather> listener) {
+        service.getCurrentWeather(lat, lon, Constants.API_KEY, Constants.UNITS).enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
             public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 if (response.isSuccessful()) {
-                    listener.onDataReceived(Weather.);
+                    CurrentWeather currentWeather = new CurrentWeather(response.body());
+                    listener.onDataReceived(currentWeather);
+                } else {
+                    listener.onFailure(response.errorBody().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
-
+                t.printStackTrace();
+                listener.onFailure(t.getLocalizedMessage());
             }
         });
 
     }
 
-    
-    public void getTomorrowsForecast() {
+
+    public void getTomorrowsForecast(double lat, double lon, final DataListener<DetailsForecast> listener) {
+        service.getTomorrowsForecast(lat, lon, Constants.API_KEY, Constants.NEXT_DAY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<DetailForecastResponse>() {
+            @Override
+            public void onResponse(Call<DetailForecastResponse> call, Response<DetailForecastResponse> response) {
+                DetailsForecast detailsForecast = new DetailsForecast(response.body());
+                listener.onDataReceived(detailsForecast);
+            }
+
+            @Override
+            public void onFailure(Call<DetailForecastResponse> call, Throwable t) {
+                t.printStackTrace();
+                listener.onFailure(t.getLocalizedMessage());
+            }
+        });
 
     }
 
-    public void getHourlyForecast() {
+    public void getHourlyForecast(final double lat, double lon, final DataListener<HourlyForecast> listener) {
+        service.getHourlyForecast(lat, lon, Constants.API_KEY, Constants.HOURLY_FORECAST_PARAMETER, Constants.UNITS).enqueue(new Callback<HourlyForecastResponse>() {
+            @Override
+            public void onResponse(Call<HourlyForecastResponse> call, Response<HourlyForecastResponse> response) {
+                HourlyForecast hourlyForecast = new HourlyForecast(response.body());
+                listener.onDataReceived(hourlyForecast);
+            }
 
+            @Override
+            public void onFailure(Call<HourlyForecastResponse> call, Throwable t) {
+                t.printStackTrace();
+                listener.onFailure(t.getLocalizedMessage());
+            }
+        });
     }
 
     public interface DataListener<T> {
         void onDataReceived(T data);
+
+        void onFailure(String message);
     }
 }

@@ -1,10 +1,19 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class List {
+import java.util.List;
+
+@Entity(tableName = "details_weather_items")
+public class HourlyWeatherItem {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("dt")
     @Expose
@@ -15,18 +24,18 @@ public class List {
     @SerializedName("sunset")
     @Expose
     private Integer sunset;
-    @SerializedName("temp")
-    @Expose
-    private Temp temp;
     @SerializedName("pressure")
     @Expose
     private Integer pressure;
     @SerializedName("humidity")
     @Expose
     private Integer humidity;
+    @SerializedName("main")
+    @Expose
+    private Main main;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather = null;
+    private List<Weather> weather = null;
     @SerializedName("speed")
     @Expose
     private Double speed;
@@ -35,13 +44,21 @@ public class List {
     private Integer deg;
     @SerializedName("clouds")
     @Expose
-    private Integer clouds;
-    @SerializedName("pop")
-    @Expose
-    private Integer pop;
+    private Clouds clouds;
     @SerializedName("rain")
     @Expose
     private Double rain;
+    @SerializedName("dt_txt")
+    @Expose
+    private String dtTxt;
+
+    public String getDtTxt() {
+        return dtTxt;
+    }
+
+    public void setDtTxt(String dtTxt) {
+        this.dtTxt = dtTxt;
+    }
 
     public Integer getDt() {
         return dt;
@@ -67,14 +84,6 @@ public class List {
         this.sunset = sunset;
     }
 
-    public Temp getTemp() {
-        return temp;
-    }
-
-    public void setTemp(Temp temp) {
-        this.temp = temp;
-    }
-
     public Integer getPressure() {
         return pressure;
     }
@@ -91,11 +100,11 @@ public class List {
         this.humidity = humidity;
     }
 
-    public java.util.List<Weather> getWeather() {
+    public List<Weather> getWeather() {
         return weather;
     }
 
-    public void setWeather(java.util.List<Weather> weather) {
+    public void setWeather(List<Weather> weather) {
         this.weather = weather;
     }
 
@@ -115,20 +124,8 @@ public class List {
         this.deg = deg;
     }
 
-    public Integer getClouds() {
+    public Clouds getClouds() {
         return clouds;
-    }
-
-    public void setClouds(Integer clouds) {
-        this.clouds = clouds;
-    }
-
-    public Integer getPop() {
-        return pop;
-    }
-
-    public void setPop(Integer pop) {
-        this.pop = pop;
     }
 
     public Double getRain() {
@@ -139,4 +136,23 @@ public class List {
         this.rain = rain;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
 }

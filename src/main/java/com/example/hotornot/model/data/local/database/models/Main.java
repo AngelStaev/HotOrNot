@@ -1,10 +1,18 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "mains")
 public class Main {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("temp")
     @Expose
@@ -14,7 +22,7 @@ public class Main {
     private Double feelsLike;
     @SerializedName("temp_min")
     @Expose
-    private Integer tempMin;
+    private Double tempMin;
     @SerializedName("temp_max")
     @Expose
     private Double tempMax;
@@ -41,11 +49,11 @@ public class Main {
         this.feelsLike = feelsLike;
     }
 
-    public Integer getTempMin() {
+    public Double getTempMin() {
         return tempMin;
     }
 
-    public void setTempMin(Integer tempMin) {
+    public void setTempMin(Double tempMin) {
         this.tempMin = tempMin;
     }
 
@@ -73,4 +81,11 @@ public class Main {
         this.humidity = humidity;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

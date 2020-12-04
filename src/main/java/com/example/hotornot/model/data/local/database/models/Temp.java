@@ -1,10 +1,16 @@
 
-package com.example.hotornot.model.data.remote.models;
+package com.example.hotornot.model.data.local.database.models;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+@Entity(tableName = "temps")
 public class Temp {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("day")
     @Expose
@@ -73,4 +79,11 @@ public class Temp {
         this.morn = morn;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
